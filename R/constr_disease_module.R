@@ -41,7 +41,7 @@ constr_disease_module <- function(Cts_list, disease_gene, itera = 1000, returnAl
                 s_ob = length(which(clu$membership == index))
                 subg <- igraph::subcomponent(g, igraph::V(g)[which(clu$membership == index)])
                 disemoduleGene <- igraph::as_ids(subg)
-                sub_net = net_disease[(net_disease$V1 %in% disemoduleGene) & (net_disease$V2 %in% disemoduleGene), 
+                sub_net = net_disease[(net_disease$V1 %in% disemoduleGene) & (net_disease$V2 %in% disemoduleGene),
                   ]
                 gene_score = score[score$gene %in% disemoduleGene, ]
                 ## calculate disease module significance
@@ -78,16 +78,16 @@ constr_disease_module <- function(Cts_list, disease_gene, itera = 1000, returnAl
             module = paste0(cell, name)
             padj = p.adj$p_adj[which(p.adj$cell == module)]
             out[[cell]][[name]][["p.adjust"]] = padj
-            if (padj < padjCutoff) 
+            if (padj < padjCutoff)
                 {
                   res[[cell]][[name]] = out[[cell]][[name]]
                 }  #end if
         }  #end for name
     }  #end for cell
-    
+
     # only significant ones can be returned.
     if (returnAllmodules == FALSE) {
-        if (length(res) == 0) 
+        if (length(res) == 0)
             warning("No significant cell type-specific disease gene modules returned. One can set returnAllmodules=TRUE to check all candidate cell type-specific disease gene modules.")
         return(res)
     }
